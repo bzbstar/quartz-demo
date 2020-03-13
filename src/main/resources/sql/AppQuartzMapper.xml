@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bzb.quartz.quartzdemo.mapper.AppQuartzMapper">
+  <resultMap id="BaseResultMap" type="com.bzb.quartz.quartzdemo.model.AppQuartz">
+    <id column="quartz_id" jdbcType="INTEGER" property="quartzId" />
+    <result column="job_name" jdbcType="VARCHAR" property="jobName" />
+    <result column="job_group" jdbcType="VARCHAR" property="jobGroup" />
+    <result column="start_time" jdbcType="VARCHAR" property="startTime" />
+    <result column="cron_expression" jdbcType="VARCHAR" property="cronExpression" />
+    <result column="invoke_params" jdbcType="VARCHAR" property="invokeParams" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    quartz_id, job_name, job_group, start_time, cron_expression, invoke_params
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_app_quartz
+    where quartz_id = #{quartzId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_app_quartz
+    where quartz_id = #{quartzId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bzb.quartz.quartzdemo.model.AppQuartz">
+    insert into tb_app_quartz (quartz_id, job_name, job_group, 
+      start_time, cron_expression, invoke_params
+      )
+    values (#{quartzId,jdbcType=INTEGER}, #{jobName,jdbcType=VARCHAR}, #{jobGroup,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=VARCHAR}, #{cronExpression,jdbcType=VARCHAR}, #{invokeParams,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bzb.quartz.quartzdemo.model.AppQuartz">
+    insert into tb_app_quartz
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="quartzId != null">
+        quartz_id,
+      </if>
+      <if test="jobName != null">
+        job_name,
+      </if>
+      <if test="jobGroup != null">
+        job_group,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="cronExpression != null">
+        cron_expression,
+      </if>
+      <if test="invokeParams != null">
+        invoke_params,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="quartzId != null">
+        #{quartzId,jdbcType=INTEGER},
+      </if>
+      <if test="jobName != null">
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobGroup != null">
+        #{jobGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="cronExpression != null">
+        #{cronExpression,jdbcType=VARCHAR},
+      </if>
+      <if test="invokeParams != null">
+        #{invokeParams,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bzb.quartz.quartzdemo.model.AppQuartz">
+    update tb_app_quartz
+    <set>
+      <if test="jobName != null">
+        job_name = #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobGroup != null">
+        job_group = #{jobGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="cronExpression != null">
+        cron_expression = #{cronExpression,jdbcType=VARCHAR},
+      </if>
+      <if test="invokeParams != null">
+        invoke_params = #{invokeParams,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where quartz_id = #{quartzId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bzb.quartz.quartzdemo.model.AppQuartz">
+    update tb_app_quartz
+    set job_name = #{jobName,jdbcType=VARCHAR},
+      job_group = #{jobGroup,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=VARCHAR},
+      cron_expression = #{cronExpression,jdbcType=VARCHAR},
+      invoke_params = #{invokeParams,jdbcType=VARCHAR}
+    where quartz_id = #{quartzId,jdbcType=INTEGER}
+  </update>
+</mapper>

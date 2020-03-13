@@ -1,0 +1,19 @@
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/quartz
+    username: root
+    password: 123456
+
+mybatis:
+  mapper-locations: classpath:sql/*Mapper.xml
+  type-aliases-package: com.bzb.quartz.quartzdemo.model
+
+#showSql
+logging:
+  level:
+    com.bzb.quartz.quartzdemo.mapper : debug
+server:
+  port: 8080
